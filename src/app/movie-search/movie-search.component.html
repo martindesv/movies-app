@@ -1,0 +1,17 @@
+<div>
+    <div id="searchForm">
+      <input type="text" [formControl]="movieTitleSearch">
+      <button (click)="searchByMovieTitle()">Search</button>
+    </div>
+  
+    <div id="searchResultContainer" *ngIf="data">
+      <div id="searchResult" *ngFor="let data of data.Search">
+        <img height="100px" src="{{ data.Poster }}" alt="Poster">
+  
+        <a (click)="goToDetails(data.imdbID)">{{ data.Title }}</a>
+        <p>{{ data.Year }}</p>
+        <p>{{ data.Type }}</p>
+      </div>
+    </div>
+  
+  </div>
