@@ -1,3 +1,17 @@
-<p>
-  movie-details works!
-</p>
+<div>
+  <div id="detailsContainer" *ngIf="detailsData">
+    <div id="details">
+      <img src="{{ detailsData.Poster }}" alt="Poster">
+
+      <p>{{ detailsData.Title }}</p>
+      <p>{{ detailsData.Year }}</p>
+      <p>{{ detailsData.Type }}</p>
+      <p>{{ detailsData.Plot }}</p>
+      <p>{{ detailsData.imdbRating }}</p>
+      <p>{{ detailsData.Runtime }}</p>
+      <p>{{ detailsData.Genre }}</p>
+    </div>
+  </div>
+
+  <a (click)="backClicked()">Back</a>
+</div>

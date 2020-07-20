@@ -12,7 +12,6 @@ export class MovieSearchComponent {
 
   movieTitleSearch = new FormControl('');
   data: {};
-  detailsData: {};
 
   constructor(
     private dataService: DataService,
@@ -28,12 +27,8 @@ export class MovieSearchComponent {
   }
 
   goToDetails(imdbID) {
-    this.dataService.getDetailsData(imdbID)
-      .subscribe(
-        (detailsData) => this.detailsData = { ...detailsData },
-        error => console.log(error),
-        () => this.router.navigate(['details'])
-      );
+    this.router.navigate(['details', { id: imdbID }])
   }
-
+  
 }
+
