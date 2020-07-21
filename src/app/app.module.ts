@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MovieSearchComponent } from './movie-search/movie-search.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import { detailsReducer } from './reducers/index';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { reducers, metaReducers } from './reducers';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers, { metaReducers })
+    StoreModule.forRoot({ detailTest: detailsReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]

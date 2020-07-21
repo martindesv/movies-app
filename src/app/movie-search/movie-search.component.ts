@@ -30,7 +30,7 @@ export class MovieSearchComponent {
   }
 
   goToDetails(imdbID) {
-    this.store.dispatch(goToDetails());
+    this.store.dispatch(goToDetails(imdbID));
     //this.router.navigate(['details', { id: imdbID }])
   }
   
