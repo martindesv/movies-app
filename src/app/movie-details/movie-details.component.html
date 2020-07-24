@@ -1,5 +1,7 @@
 <div>
   <div id="detailsContainer" *ngIf="detailsData">
+    <a (click)="backClicked()">Back</a>
+
     <div id="details">
       <img src="{{ detailsData.Poster }}" alt="Poster">
 
@@ -12,6 +14,4 @@
       <p>{{ detailsData.Genre }}</p>
     </div>
   </div>
-
-  <a (click)="backClicked()">Back</a>
 </div>

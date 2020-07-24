@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { ActivatedRoute } from '@angular/router';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-movie-details',
@@ -29,7 +29,6 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   backClicked() {
-    console.log('here');
     this.location.back();
   }
 

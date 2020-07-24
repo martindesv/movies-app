@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DataService } from '../data.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { goToDetails } from '../data.actions';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-movie-search',
@@ -18,20 +19,53 @@ export class MovieSearchComponent {
   constructor(
     private dataService: DataService,
     private router: Router,
-    private store: Store<{ imdbID: string }>
+    private route: ActivatedRoute,
+    private store: Store<{ imdbID: string }>,
+    private location: Location
   ) {}
+
+/*   searchByMovieTitle() {
+    this.dataService.getData(this.movieTitleSearch.value)
+      .subscribe(
+        (data) => this.data = { ...data },
+        error => console.log(error),
+      );
+  } */
 
   searchByMovieTitle() {
     this.dataService.getData(this.movieTitleSearch.value)
+      .subscribe(
+        (data) => {
+          this.data = { ...data }
+          this.router.navigate(['/search', { title: this.movieTitleSearch.value }])
+        },
+        error => console.log(error),
+      );
+  }
+
+  dataAfterBack(title) {
+    console.log('dataAfterBack');
+    this.dataService.getData(title)
       .subscribe(
         (data) => this.data = { ...data },
         error => console.log(error),
       );
   }
 
+  ngOnInit() {
+    let title = this.route.snapshot.paramMap.get('title');
+    if (title) {
+      this.dataAfterBack(title);
+    }
+    }
+
   goToDetails(imdbID) {
-    this.store.dispatch(goToDetails(imdbID));
-    //this.router.navigate(['details', { id: imdbID }])
+    //this.store.dispatch(goToDetails());
+    this.dataService.getDetailsData(imdbID)
+      .subscribe(
+        () => this.router.navigate(['/search/details', { id: imdbID }]),
+        error => console.log(error),
+      );
   }
   
 }

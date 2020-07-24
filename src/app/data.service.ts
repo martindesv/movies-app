@@ -15,4 +15,8 @@ export class DataService {
   getDetailsData(string) {
     return this.http.get('http://www.omdbapi.com/?apikey=f79aeba3&i=' + string);
   }
+
+  getAll(imdbID) {
+    return this.http.get('http://www.omdbapi.com/?apikey=f79aeba3&i=' + imdbID);
+  }
 }
