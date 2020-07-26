@@ -24,14 +24,6 @@ export class MovieSearchComponent {
     private location: Location
   ) {}
 
-/*   searchByMovieTitle() {
-    this.dataService.getData(this.movieTitleSearch.value)
-      .subscribe(
-        (data) => this.data = { ...data },
-        error => console.log(error),
-      );
-  } */
-
   searchByMovieTitle() {
     this.dataService.getData(this.movieTitleSearch.value)
       .subscribe(
@@ -44,7 +36,8 @@ export class MovieSearchComponent {
   }
 
   dataAfterBack(title) {
-    console.log('dataAfterBack');
+    console.log('dataAfterBack')
+    this.movieTitleSearch.setValue(title)
     this.dataService.getData(title)
       .subscribe(
         (data) => this.data = { ...data },

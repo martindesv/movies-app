@@ -1,9 +1,11 @@
-<div>
-    <div id="searchForm">
-      <input type="text" [formControl]="movieTitleSearch">
-      <button (click)="searchByMovieTitle()">Search</button>
-    </div>
-  
+<div id="searchFormContainer">
+  <div id="searchForm">
+    <input placeholder="Search by title" type="text" [formControl]="movieTitleSearch">
+    <button (click)="searchByMovieTitle()">Search</button>
+  </div>
+</div>
+
+<main>
     <div id="searchResultContainer" *ngIf="data">
       <div id="searchResult" *ngFor="let data of data.Search">
         <img height="100px" src="{{ data.Poster }}" alt="Poster">
@@ -13,4 +15,4 @@
         <p>{{ data.Type }}</p>
       </div>
     </div>
-</div>
+</main>
