@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { goToDetails } from '../data.actions';
 import { Location } from '@angular/common';
 
 @Component({
@@ -53,7 +52,6 @@ export class MovieSearchComponent {
     }
 
   goToDetails(imdbID) {
-    //this.store.dispatch(goToDetails());
     this.dataService.getDetailsData(imdbID)
       .subscribe(
         () => this.router.navigate(['/search/details', { id: imdbID }]),

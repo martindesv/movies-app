@@ -8,7 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MovieSearchComponent } from './movie-search/movie-search.component';
 import { StoreModule } from '@ngrx/store';
-import { detailsReducer } from './reducers/index';
+import { EffectsModule } from '@ngrx/effects';
+import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
+import { entityConfig } from './entity-metadata';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { detailsReducer } from './reducers/index';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({ detailTest: detailsReducer })
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    EntityDataModule.forRoot(entityConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

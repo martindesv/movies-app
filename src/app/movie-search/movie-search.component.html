@@ -8,7 +8,9 @@
 <main>
     <div id="searchResultContainer" *ngIf="data">
       <div id="searchResult" *ngFor="let data of data.Search">
-        <img height="100px" src="{{ data.Poster }}" alt="Poster">
+        <div>
+          <img width="100px" src="{{ data.Poster }}" alt="Poster">
+        </div>
   
         <a (click)="goToDetails(data.imdbID)">{{ data.Title }}</a>
         <p>{{ data.Year }}</p>

@@ -3,15 +3,17 @@
     <a (click)="backClicked()">Back</a>
 
     <div id="details">
-      <img src="{{ detailsData.Poster }}" alt="Poster">
+      <img width=300 src="{{ detailsData.Poster }}" alt="Poster">
 
-      <p>{{ detailsData.Title }}</p>
-      <p>{{ detailsData.Year }}</p>
-      <p>{{ detailsData.Type }}</p>
-      <p>{{ detailsData.Plot }}</p>
-      <p>{{ detailsData.imdbRating }}</p>
-      <p>{{ detailsData.Runtime }}</p>
-      <p>{{ detailsData.Genre }}</p>
+      <div class="detailsData">
+        <p><strong>Title:</strong> {{ detailsData.Title }}</p>
+        <p><strong>Year:</strong> {{ detailsData.Year }}</p>
+        <p><strong>Type:</strong> {{ detailsData.Type }}</p>
+        <p><strong>Plot:</strong> {{ detailsData.Plot }}</p>
+        <p><strong>IMDB rating:</strong> {{ detailsData.imdbRating }}</p>
+        <p><strong>Runtime:</strong> {{ detailsData.Runtime }}</p>
+        <p><strong>Genre:</strong> {{ detailsData.Genre }}</p>
+      </div>
     </div>
   </div>
 </main>
