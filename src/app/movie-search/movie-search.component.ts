@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-movie-search',
@@ -14,13 +12,12 @@ export class MovieSearchComponent {
 
   movieTitleSearch = new FormControl('');
   data: {};
+  showError: true;
 
   constructor(
     private dataService: DataService,
     private router: Router,
-    private route: ActivatedRoute,
-    private store: Store<{ imdbID: string }>,
-    private location: Location
+    private route: ActivatedRoute
   ) {}
 
   searchByMovieTitle() {
@@ -28,7 +25,12 @@ export class MovieSearchComponent {
       .subscribe(
         (data) => {
           this.data = { ...data }
-          this.router.navigate(['/search', { title: this.movieTitleSearch.value }])
+          if (data['Response'] === "True") {
+            console.log(data['Response'])
+            this.router.navigate(['/search', { title: this.movieTitleSearch.value }])
+          } else {
+            this.showError = true
+          }
         },
         error => console.log(error),
       );

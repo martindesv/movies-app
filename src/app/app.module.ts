@@ -7,10 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MovieSearchComponent } from './movie-search/movie-search.component';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
-import { entityConfig } from './entity-metadata';
 
 @NgModule({
   declarations: [
@@ -22,10 +18,7 @@ import { entityConfig } from './entity-metadata';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
-    EntityDataModule.forRoot(entityConfig)
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
