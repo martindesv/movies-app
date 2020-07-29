@@ -26,13 +26,17 @@ export class MovieSearchComponent {
         (data) => {
           this.data = { ...data }
           if (data['Response'] === "True") {
-            console.log(data['Response'])
+
             this.router.navigate(['/search', { title: this.movieTitleSearch.value }])
           } else {
+            this.router.navigate(['/search', { result: 'error' }])
             this.showError = true
           }
         },
-        error => console.log(error),
+        error => {
+          this.showError = true
+          console.log(error)
+        }
       );
   }
 
