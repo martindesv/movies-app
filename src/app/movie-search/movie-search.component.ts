@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -50,17 +50,24 @@ export class MovieSearchComponent {
       );
   }
 
+  @HostListener('window:popstate', ['$event'])
+  onPopState(event) {
+    console.log('button pressed');
+  }
+  
+
   ngOnInit() {
+    console.log('init')
     let title = this.route.snapshot.paramMap.get('title');
     if (title) {
       this.dataAfterBack(title);
     }
-    }
+  }
 
   goToDetails(imdbID) {
     this.dataService.getDetailsData(imdbID)
       .subscribe(
-        () => this.router.navigate(['/search/details', { id: imdbID }]),
+        () => this.router.navigate(['details', { id: imdbID }]),
         error => console.log(error),
       );
   }

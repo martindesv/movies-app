@@ -5,7 +5,8 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 
 const routes: Routes = [
   { path: 'search', component: MovieSearchComponent },
-  { path: 'search/details', component: MovieDetailsComponent }
+  { path: 'details', component: MovieDetailsComponent },
+  { path: '',   redirectTo: '/search', pathMatch: 'full' }
 ];
 
 @NgModule({
