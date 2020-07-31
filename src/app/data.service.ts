@@ -8,8 +8,8 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  getData(string) {
-    return this.http.get('http://www.omdbapi.com/?apikey=f79aeba3&s=' + string);
+  getData(string, pageNum) {
+    return this.http.get('http://www.omdbapi.com/?apikey=f79aeba3&s=' + string + '&page=' + pageNum);
   }
 
   getDetailsData(string) {

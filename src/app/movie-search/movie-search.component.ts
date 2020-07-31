@@ -9,6 +9,9 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./movie-search.component.sass']
 })
 export class MovieSearchComponent {
+  page = "";
+  collectionSize = "";
+  loading = false;
 
   movieTitleSearch = new FormControl('');
   data: {};
@@ -20,48 +23,48 @@ export class MovieSearchComponent {
     private route: ActivatedRoute
   ) {}
 
+  ngOnInit() {
+    let title = this.route.snapshot.paramMap.get('title');
+    this.page = this.route.snapshot.paramMap.get('page');
+    if (title) {
+      this.setSearchData(title, this.page);
+    }
+  }
+
   searchByMovieTitle() {
-    this.dataService.getData(this.movieTitleSearch.value)
+    this.setSearchData(this.movieTitleSearch.value, 1);
+  }
+
+  setSearchData(title, pageNum) {
+    console.log('here')
+    this.movieTitleSearch.setValue(title)
+    this.loading = true;
+    this.dataService.getData(title, pageNum)
       .subscribe(
         (data) => {
           this.data = { ...data }
+          this.loading = false;
           if (data['Response'] === "True") {
-
-            this.router.navigate(['/search', { title: this.movieTitleSearch.value }])
+            this.collectionSize = data['totalResults']
+            this.router.navigate(['/search', { title: this.movieTitleSearch.value, page: pageNum }])
           } else {
             this.router.navigate(['/search', { result: 'error' }])
             this.showError = true
           }
         },
         error => {
+          this.loading = false;
           this.showError = true
           console.log(error)
         }
       );
   }
 
-  dataAfterBack(title) {
-    console.log('dataAfterBack')
-    this.movieTitleSearch.setValue(title)
-    this.dataService.getData(title)
-      .subscribe(
-        (data) => this.data = { ...data },
-        error => console.log(error),
-      );
-  }
-
+  // maybe
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
     console.log('button pressed');
-  }
-  
-
-  ngOnInit() {
-    console.log('init')
-    let title = this.route.snapshot.paramMap.get('title');
-    if (title) {
-      this.dataAfterBack(title);
-    }
+    window.location.reload();
   }
 
   goToDetails(imdbID) {
@@ -70,6 +73,11 @@ export class MovieSearchComponent {
         () => this.router.navigate(['details', { id: imdbID }]),
         error => console.log(error),
       );
+  }
+
+  loadPage(event) {
+    this.setSearchData(this.movieTitleSearch.value, Number(event.originalTarget.childNodes[0].data)); // There were issues with "out-of-the-box" page change functionality, so I did a workaround.
+    window.scrollTo(0,0);
   }
   
 }

@@ -1,12 +1,16 @@
 <div id="searchFormContainer">
   <div id="searchForm">
     <input placeholder="Search by title" type="text" [formControl]="movieTitleSearch">
-    <button (click)="searchByMovieTitle()">Search</button>
+    <button (click)="searchByMovieTitle()">SEARCH</button>
   </div>
 </div>
 
 <main>
-    <div id="searchResultContainer" *ngIf="data">
+    <div *ngIf="loading" class="spinner-border text-warning" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+
+    <div id="searchResultContainer" *ngIf="!loading && data">
       <div id="searchResult" *ngFor="let data of data.Search">
         <div>
           <img width="100px" src="{{ data.Poster }}" alt="Poster">
@@ -16,7 +20,9 @@
         <p>{{ data.Year }}</p>
         <p>{{ data.Type }}</p>
       </div>
-    </div>
 
-    <div *ngIf="showError">{{ data.Error }}</div>
+      <div *ngIf="showError">{{ data.Error }}</div>
+
+      <ngb-pagination *ngIf="!showError" id="pagination" [collectionSize]="collectionSize" [(page)]="page" [maxSize]="5" [rotate]="false" [ellipses]="false" [boundaryLinks]="false" (click)="loadPage($event)"></ngb-pagination>
+    </div>
 </main>

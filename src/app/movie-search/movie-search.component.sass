@@ -1,7 +1,12 @@
+main
+  .spinner-border
+    margin: 30px auto
+    display: block
+
 #searchResult
   clear: both
-  margin-top: 15px
-  padding-bottom: 15px
+  margin-top: 20px
+  padding-bottom: 20px
   overflow: hidden
   border-bottom: 1px solid #ccc
 
@@ -11,15 +16,15 @@
 
   p
     margin-top: 5px
+    margin-bottom: 0
+
+  a
+    color: blue
+    cursor: pointer
 
 #searchFormContainer
   background: #eee
   padding: 20px
-
-#searchForm
-  display: flex
-  max-width: 800px
-  margin: auto
 
   input, button
     height: 48px
@@ -28,10 +33,34 @@
     border: 1px solid grey
     padding: 0 10px
     background: white
+    width: 100%
 
   button
+    margin-top: 15px
     cursor: pointer
-    margin-left: 10px
+    background: #f5c518
+    border: none
+    color: black
+    font-size: 14px
 
   input
     flex: 1
+
+ngb-pagination ::ng-deep
+  .pagination
+    justify-content: center
+    margin-top: 30px
+    margin-bottom: 30px
+  
+  
+
+@media (min-width: 480px)
+  #searchFormContainer button
+    margin-left: 10px
+    width: 100px
+    margin-top: 0
+
+  #searchForm
+    display: flex
+    max-width: 800px
+    margin: auto
