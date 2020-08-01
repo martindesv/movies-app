@@ -1,0 +1,13 @@
+{
+  "firebase": "movies-app",
+  "public": "dist/movies-app",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ],
+  "rewrites": [ {
+    "source": "**",
+    "destination": "/index.html"
+  } ]
+}

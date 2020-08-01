@@ -30,7 +30,6 @@
               "src/styles.sass"
             ],
             "scripts": []
-            //"es5BrowserSupport": true
           },
           "configurations": {
             "production": {
@@ -104,6 +103,10 @@
               "**/node_modules/**"
             ]
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     },

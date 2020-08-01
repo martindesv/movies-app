@@ -9,13 +9,13 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./movie-search.component.sass']
 })
 export class MovieSearchComponent {
-  page = "";
-  collectionSize = "";
-  loading = false;
+  page: Number;
+  collectionSize: Number;
+  loading: boolean = false;
 
   movieTitleSearch = new FormControl('');
   data: {};
-  showError: true;
+  showError: boolean;
 
   constructor(
     private dataService: DataService,
@@ -25,7 +25,7 @@ export class MovieSearchComponent {
 
   ngOnInit() {
     let title = this.route.snapshot.paramMap.get('title');
-    this.page = this.route.snapshot.paramMap.get('page');
+    this.page = Number(this.route.snapshot.paramMap.get('page'));
     if (title) {
       this.setSearchData(title, this.page);
     }
@@ -36,7 +36,6 @@ export class MovieSearchComponent {
   }
 
   setSearchData(title, pageNum) {
-    console.log('here')
     this.movieTitleSearch.setValue(title)
     this.loading = true;
     this.dataService.getData(title, pageNum)
@@ -60,23 +59,19 @@ export class MovieSearchComponent {
       );
   }
 
-  // maybe
   @HostListener('window:popstate', ['$event'])
   onPopState(event) {
-    console.log('button pressed');
     window.location.reload();
   }
 
-  goToDetails(imdbID) {
-    this.dataService.getDetailsData(imdbID)
-      .subscribe(
-        () => this.router.navigate(['details', { id: imdbID }]),
-        error => console.log(error),
-      );
+  goToDetails(imdbID, index) {
+    document.getElementsByClassName("spinner" + index)[0].removeAttribute("hidden");
+    document.getElementsByClassName("dataColumn" + index)[0].setAttribute("hidden", "true");
+    this.router.navigate(['details', { id: imdbID }])
   }
 
-  loadPage(event) {
-    this.setSearchData(this.movieTitleSearch.value, Number(event.originalTarget.childNodes[0].data)); // There were issues with "out-of-the-box" page change functionality, so I did a workaround.
+  loadPage(page: Number) {
+    this.setSearchData(this.movieTitleSearch.value, page);
     window.scrollTo(0,0);
   }
   

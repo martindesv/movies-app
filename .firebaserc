@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "movies-app-ee80b": {
+      "hosting": {
+        "movies-app": [
+          "movies-app-ee80b"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "movies-app-ee80b"
+  }
+}

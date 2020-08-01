@@ -10,6 +10,9 @@ import { Location } from '@angular/common';
 })
 export class MovieDetailsComponent implements OnInit {
 
+  showError: boolean = false;
+  loading: boolean = true;
+
   detailsData: {};
 
   constructor(
@@ -23,7 +26,14 @@ export class MovieDetailsComponent implements OnInit {
 
     this.dataService.getDetailsData(imdbID)
     .subscribe(
-      (detailsData) => this.detailsData = { ...detailsData },
+      (detailsData) => {
+        this.loading = false
+        this.detailsData = { ...detailsData }
+        if (detailsData['Response'] === "True") {
+        } else {
+          this.showError = true
+        }
+      },
       error => console.log(error),
     );
   }

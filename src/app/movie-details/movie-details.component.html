@@ -1,8 +1,12 @@
 <main>
+  <div *ngIf="loading" class="spinner-border text-warning" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+
   <div id="detailsContainer" *ngIf="detailsData">
     <a (click)="backClicked()">Back</a>
 
-    <div id="details">
+    <div *ngIf="!showError" id="details">
       <img width=280 src="{{ detailsData.Poster }}" alt="Poster">
 
       <div class="detailsData">
@@ -15,5 +19,7 @@
         <p><strong>Genre:</strong> {{ detailsData.Genre }}</p>
       </div>
     </div>
+
+    <div *ngIf="showError">{{ detailsData.Error }}</div>
   </div>
 </main>
