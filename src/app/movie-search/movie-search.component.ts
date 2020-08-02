@@ -36,13 +36,13 @@ export class MovieSearchComponent {
   }
 
   setSearchData(title, pageNum) {
-    this.movieTitleSearch.setValue(title)
     this.loading = true;
     this.dataService.getData(title, pageNum)
       .subscribe(
         (data) => {
           this.data = { ...data }
           this.loading = false;
+          this.movieTitleSearch.setValue(title)
           if (data['Response'] === "True") {
             this.collectionSize = data['totalResults']
             this.router.navigate(['/search', { title: this.movieTitleSearch.value, page: pageNum }])
