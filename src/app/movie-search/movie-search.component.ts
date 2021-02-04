@@ -74,6 +74,5 @@ export class MovieSearchComponent {
     this.setSearchData(this.movieTitleSearch.value, page);
     window.scrollTo(0,0);
   }
-  
 }
 
