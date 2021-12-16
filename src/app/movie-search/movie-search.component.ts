@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import {Component, OnInit, HostListener, ViewChildren} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DataService } from '../data.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class MovieSearchComponent {
   page: Number;
   collectionSize: Number;
-  loading: boolean = false;
+  loading = false;
 
   movieTitleSearch = new FormControl('');
   data: {};
@@ -40,21 +40,21 @@ export class MovieSearchComponent {
     this.dataService.getData(title, pageNum)
       .subscribe(
         (data) => {
-          this.data = { ...data }
+          this.data = { ...data };
           this.loading = false;
-          this.movieTitleSearch.setValue(title)
-          if (data['Response'] === "True") {
-            this.collectionSize = data['totalResults']
+          this.movieTitleSearch.setValue(title);
+          if (data['Response'] === 'True') {
+            this.collectionSize = data['totalResults'];
             this.router.navigate(['/search', { title: this.movieTitleSearch.value, page: pageNum }])
           } else {
             this.router.navigate(['/search', { result: 'error' }])
-            this.showError = true
+            this.showError = true;
           }
         },
         error => {
           this.loading = false;
-          this.showError = true
-          console.log(error)
+          this.showError = true;
+          console.log(error);
         }
       );
   }
@@ -65,14 +65,14 @@ export class MovieSearchComponent {
   }
 
   goToDetails(imdbID, index) {
-    document.getElementsByClassName("spinner" + index)[0].removeAttribute("hidden");
-    document.getElementsByClassName("dataColumn" + index)[0].setAttribute("hidden", "true");
-    this.router.navigate(['details', { id: imdbID }])
+    document.getElementsByClassName('spinner' + index)[0].removeAttribute('hidden');
+    document.getElementsByClassName('dataColumn' + index)[0].setAttribute('hidden', 'true');
+    this.router.navigate(['details', { id: imdbID }]);
   }
 
   loadPage(page: Number) {
     this.setSearchData(this.movieTitleSearch.value, page);
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }
 }
 
