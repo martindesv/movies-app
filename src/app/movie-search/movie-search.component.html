@@ -11,18 +11,18 @@
     </div>
 
     <div id="searchResultContainer" *ngIf="!loading && data">
-      <div id="searchResult" *ngFor="let data of data.Search; let i = index">
+      <div id="searchResult" *ngFor="let data of data.Search;">
         <div>
           <img width="100px" src="{{ data.Poster }}" alt="Poster">
         </div>
-        
-        <div class="dataColumn{{ i }}">
-          <a (click)="goToDetails(data.imdbID, i)">{{ data.Title }}</a>
+
+        <div #dataColumn>
+          <a (click)="goToDetails(data.imdbID, dataColumn, spinner)">{{ data.Title }}</a>
           <p>{{ data.Year }}</p>
           <p>{{ data.Type }}</p>
         </div>
 
-        <div [hidden] = true class="spinner-border text-warning spinner{{ i }}" role="status">
+        <div #spinner [hidden] = true class="spinner-border text-warning" role="status">
           <span class="sr-only">Loading...</span>
         </div>
       </div>

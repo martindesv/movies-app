@@ -64,9 +64,10 @@ export class MovieSearchComponent {
     window.location.reload();
   }
 
-  goToDetails(imdbID, index) {
-    document.getElementsByClassName('spinner' + index)[0].removeAttribute('hidden');
-    document.getElementsByClassName('dataColumn' + index)[0].setAttribute('hidden', 'true');
+  goToDetails(imdbID, dataColumn: HTMLElement, spinner: HTMLElement) {
+    // TODO: investigate
+    dataColumn.setAttribute('hidden', 'true');
+    spinner.removeAttribute('hidden');
     this.router.navigate(['details', { id: imdbID }]);
   }
 
