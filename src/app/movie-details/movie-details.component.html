@@ -1,7 +1,5 @@
 <main>
-  <div *ngIf="loading" class="spinner-border text-warning" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
+  <div *ngIf="loading" class="spinner-border text-warning" role="status"></div>
 
   <div id="detailsContainer" *ngIf="detailsData">
     <a (click)="backClicked()">Back</a>
